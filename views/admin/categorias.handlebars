@@ -19,7 +19,7 @@
       <td>{{nome}}</td>
       <td>
           <a href="/admin/categorias/formUpdate/{{_id}}" class="btn btn-warning">Edit</a>
-          <a href="/admin/categorias/formUpdate" class="btn btn-danger">Delete</a>
+          <a href="/admin/categorias/delete/{{_id}}" class="btn btn-danger">Delete</a>
       </td>
     </tr>
   </tbody>
@@ -27,11 +27,5 @@
 {{else}}
 
 {{/each}}    
-        <div class="card">
-            <div class="card-body">
-                <h4>{{nome}}</h4>
-            </div>
-        </div>
-    
-</div>
+        
     

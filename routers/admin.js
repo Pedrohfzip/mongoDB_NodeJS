@@ -38,24 +38,31 @@ router.get('/categorias/formUpdate/:id', (req,res) => {
 
 router.post('/categorias/update', (req,res) => {
     Categoria.findOne({_id: req.body.id}).then((categoria) => {
-            console.log(`Cateogira: ${categoria}(${typeof categoria})`)
-            console.log(`Nome inserido: ${req.body.nomeUpdate}(${typeof req.body.nomeUpdate})`)
-            console.log(`ID: ${req.body.id}(${typeof req.body.id})`)
-            categoria.updateOne(
-                {_id: req.body.id},
-                {
-                nome: req.body.nomeUpdate
-                }
-            ).lean().then(()=>{
-                console.log(`Atualizado com sucesso`)
-                res.redirect("/admin/categorias")
-            }).catch((e)=>{
-                console.log(`${e}`)
-            });
-              
+        categoria.updateOne({id: req.body.id})
+        .set({
+            nome: req.body.nomeUpdate
+        }).then(()=>{
+            console.log("Updtado")
+            res.redirect("/admin/categorias")
+        }).catch((e) => {
+            console.log(`${e}`)
+        })
     }).catch((e) => {
         console.log(`${e}`)
     })
+            
+});
+
+router.get('/categorias/delete/:id', (req,res) => {
+    Categoria.findOne({_id: req.params._id}).then((categoria) => {
+        categoria.deleteOne();
+    }).catch((e) => {
+        console.log(`${e}`)
+    })
+          
+            
+              
+    
 });
 
 //Rota para adicionar a caterogira no banco
