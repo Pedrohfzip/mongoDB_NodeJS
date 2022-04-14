@@ -1,0 +1,37 @@
+<h1>Lista Categorias</h1>
+<hr>
+
+<a class="btn btn-success mb-4" href="/admin/categorias/formcategorias">Adicionar categorias</a>
+
+<div class="col-6">
+{{#each categorias}}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{ObjectId}}</th>
+      <td>{{nome}}</td>
+      <td>
+          <a href="/admin/categorias/formUpdate/{{_id}}" class="btn btn-warning">Edit</a>
+          <a href="/admin/categorias/formUpdate" class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{{else}}
+
+{{/each}}    
+        <div class="card">
+            <div class="card-body">
+                <h4>{{nome}}</h4>
+            </div>
+        </div>
+    
+</div>
+    

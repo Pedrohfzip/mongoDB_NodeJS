@@ -1,0 +1,20 @@
+
+{{#categoria}}
+    <h1 class="mb-4 mt-4">Edite a Categoria</h1>
+    <div class="card row align-items-center">
+        <div class="cord-body">
+            <form action="/admin/categorias/update" method="POST" >
+                    <input type="hidden" name="id" value="{{_id}}">
+                    <label for="exampleInputEmail1" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="nomeUpdate" value="{{nome}}" >
+    
+                    <button type="submit" class="btn btn-success">Editar</button>
+                
+            </form>
+        </div>
+    </div>
+    <a class="btn btn-success mt-3" href="/admin/categorias/">Voltar</a>
+{{/categoria}}
+    
+
+    
