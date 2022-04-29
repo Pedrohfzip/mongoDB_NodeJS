@@ -1,1 +1,29 @@
-<a href="/admin/categorias"><button class="btn btn-success">Teste</button><a href=""></a>
+<div class="col-6 mx-auto mb-4">
+        <div class="d-flex justify-content-center mt-5">
+            <form action="" class="d-flex">
+                <input type="search" class="form-control me-2 " placeholder="Search">
+                <a href="" class="btn btn-outline-success">Pesquisar</a>
+            </form>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/admin/formprodutos" class="btn btn-success ps-4 pe-4">Add Item</a>
+            <a class="btn btn-success  " href="/admin/categorias/formcategorias">Add categorias</a>    
+        </div>
+        
+        
+</div>
+
+<hr>
+
+
+<div class="d-flex flex-wrap mx-auto">
+    {{#each produtos}}
+        <div class="text-center me-2 ">
+            <h1>{{nome}}</h1>
+            <p>Preço: {{preco}}</p>
+        </div>
+    {{else}}
+    {{/each}}
+</div>
+
+    

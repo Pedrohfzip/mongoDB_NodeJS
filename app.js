@@ -53,11 +53,12 @@ app.use( (req,res,next) =>{
 
 //Configuração Mongodb
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/categorias").then( () => {
+mongoose.connect("mongodb://localhost/produtos").then( () => {
     console.log("Conectado ao mongodb");
 }).catch( (e) => {
     console.log("Erro conexão ao mongodb"+e);
 });
+
 
 //=================================
 
