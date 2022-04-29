@@ -1,31 +1,33 @@
-<h1>Lista Categorias</h1>
-<hr>
+<div class="container">
+  <h1>Lista Categorias</h1>
+  <hr>
 
-<a class="btn btn-success mb-4" href="/admin/categorias/formcategorias">Adicionar categorias</a>
+  <a class="btn btn-success mb-4" href="/admin/categorias/formcategorias">Adicionar categorias</a>
+  <a class="btn btn-success mb-4" href="/admin/">Voltar aos Produtos</a>
 
-<div class="col-6">
-{{#each categorias}}
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Options</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">{{ObjectId}}</th>
-      <td>{{nome}}</td>
-      <td>
-          <a href="/admin/categorias/formUpdate/{{_id}}" class="btn btn-warning">Edit</a>
-          <a href="/admin/categorias/delete/{{_id}}" class="btn btn-danger">Delete</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-{{else}}
+  <div class="col">
+  {{#each categorias}}
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-6">Name</th>
+        <th class="col-6">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{nome}}</td>
+        <td>
+            <a href="/admin/categorias/formUpdateCategoria/{{_id}}" class="btn btn-warning">Edit</a>
+            <a href="/admin/categorias/delete/{{_id}}" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  {{else}}
 
-{{/each}}    
+  {{/each}}  
+</div>
+    
         
     

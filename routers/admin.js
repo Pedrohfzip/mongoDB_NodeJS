@@ -18,11 +18,12 @@ const router = express();
         
 */
 
+
 //Rota pagina index admin
 router.get('/', (req,res) => {
     //res.render("admin/index");
     
-    Produto.find({}).lean().then((produtos) => {
+    Produto.find({}).populate("categoria").lean().then((produtos) => {
         res.render("admin", {produtos: produtos});
     }).catch(() => {
         req.flash("error_msg", "Erro na busca de produtos")
@@ -36,13 +37,25 @@ router.get('/', (req,res) => {
 // <============= 
         //Paginas e Rotas produtos
 
+    //Rota pagina formulario add produtos
     router.get("/formprodutos", (req,res) => {
-        res.render("admin/formprodutos")
+        Categoria.find({}).lean().then((categorias) => {
+            res.render("admin/formprodutos", {categorias: categorias});
+        }).catch(() => {
+            req.flash("error_msg", "Erro na busca de categorias")
+        }) 
     })
+    //Rota addProdutos
     router.post("/addprodutos", (req,res) => {
+        // console.log(
+        //     `Nome produto: ${req.body.nomeproduto}`,
+        //     `preco: ${req.body.preco}`,
+        //     `categoria: ${req.body.categoria}`
+        // )
         const newProduto = {
             nome: req.body.nomeproduto,
-            preco: req.body.preco
+            preco: req.body.preco,
+            categoria: req.body.categoria
         }
         new Produto(newProduto).save().then( () => {
             console.log(newProduto)
@@ -53,6 +66,62 @@ router.get('/', (req,res) => {
             res.redirect('/admin/formprodutos')
         });
     })
+
+    //Rota pagina formulario update produto
+    router.get('/formUpdateProdutos/:id', (req,res) => {
+        Produto.findOne({_id: req.params.id}).populate("categoria").lean().then((produtos) => {
+            Categoria.find({}).lean().then((categorias) => {
+                res.render("admin/formUpdateProdutos", {produtos: produtos, categorias: categorias });
+            }).catch(() => {
+                req.flash("error_msg", "Erro na busca de categorias")
+            }) 
+        })
+        
+        
+    })
+
+    router.post('/updateProduto', (req,res) => {
+        Produto.findOne({_id: req.body.id}).then((produtos) => {
+            produtos.nome = req.body.nomeProdutoUpdate,
+            produtos.preco = req.body.precoUpdate,
+            produtos.categoria = req.body.categoriaUpdate
+            produtos.save().then(() =>{
+                req.flash("success_msg", "Editou")
+                res.redirect("/admin/")
+            })
+
+            // produtos.updateOne({id: req.body.id})
+            // .set({
+            //     nome: req.body.nomeProdutoUpdate,
+            //     preco: req.body.precoUpdate,
+
+            // }).then(()=>{
+            //     console.log("Updtado")
+            //     res.redirect("/admin/")
+            // }).catch((e) => {
+            //     console.log(`${e}`)
+            // })
+
+        }).catch((e) => {
+            console.log(`${e}`)
+        })
+                
+    });
+
+    router.get('/deleteProduto/:id', (req,res) => {
+    
+        Produto.findOne({_id: req.params.id}).then((produtos) => {
+            produtos.remove({id:{id:req.params.id}}, () => {
+                res.redirect("/admin/")
+            })
+        }).catch((e) => {
+            console.log(`${e}`)
+        })
+                    
+                
+        
+    });
+    
 
 
 // =============>
@@ -71,7 +140,7 @@ router.get('/', (req,res) => {
             res.render("admin/categorias", {categorias: categorias});
         }).catch(() => {
             req.flash("error_msg", "Erro na busca de categorias")
-        })
+        }) 
 
     });
 
@@ -111,19 +180,14 @@ router.get('/', (req,res) => {
             res.render("admin/formcategorias", {errors: errors})
         }
 
-        
-        
-
         //Cadastra a categoria no banco
-        
-        
     });
 
     //Rota pagina update categoria
-    router.get('/categorias/formUpdate/:id', (req,res) => {
+    router.get('/categorias/formUpdateCategoria/:id', (req,res) => {
         Categoria.find({_id: req.params.id}).lean().then((categoria) => {
-            res.render("admin/formUpdate", {categoria: categoria});
-        })
+            res.render("admin/formUpdateCategoria", {categoria: categoria});
+    })
         
     });
     //Rota para update

@@ -11,6 +11,10 @@ const admin = require("./routers/admin")
 const path = require("path")
 const session = require("express-session")
 const flash = require("connect-flash")
+require("./Models/Produto")
+require("./Models/Categoria")
+const Categoria = mongoose.model("categorias")
+const Produto = mongoose.model("produtos")
 const port = 4000
 
 //=================================
@@ -70,7 +74,12 @@ mongoose.connect("mongodb://localhost/produtos").then( () => {
 app.use('/admin', admin)
 
 app.get('/', (req,res) => {
-    res.render("home/index")
+    //res.render("home/index")
+    Produto.find({}).populate("categoria").lean().then((produtos) => {
+        res.render("home/index", {produtos: produtos});
+    }).catch(() => {
+        req.flash("error_msg", "Erro na busca de produtos")
+    })
 })
 
 app.listen(port, () => {

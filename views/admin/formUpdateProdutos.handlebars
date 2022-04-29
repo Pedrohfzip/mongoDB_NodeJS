@@ -1,0 +1,31 @@
+<div class="container">
+    
+        <h1 class="mb-4 mt-4">Edite o Produto</h1>
+        <div class="card row align-items-center">
+            <div class="cord-body">
+                <form action="/admin/updateProduto" method="POST" >
+                        <input type="hidden" name="id" value="{{produtos._id}}">
+                        <label for="exampleInputEmail1" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="nomeProdutoUpdate" value="{{produtos.nome}}" >
+                        <label for="exampleInputEmail1" class="form-label">Preço</label>
+                        <input type="number" class="form-control" id="exampleInputEmail1" name="precoUpdate" value="{{produtos.preco}}" >
+                        <div class=" col-auto mb-3 mt-4">
+                            <label for="exampleInputEmail1" class="form-label">Categoria</label>
+                            <select class="form-select" name="categoriaUpdate">
+                                    <option selected>{{produtos.categoria.nome}}</option>
+                                    {{#each categorias}} 
+                                        <option value="{{_id}}">{{nome}}</option>
+                                    {{else}}
+                                        <option>Nenhuma Categoria cadastrada</option>
+                                    {{/each}}  
+                            </select>
+                        </div>
+        
+                        <button type="submit" class="btn btn-success">Editar</button>
+                    
+                </form>
+            </div>
+        </div>
+        <a class="btn btn-success mt-3" href="/admin/">Voltar</a>
+    
+</div>

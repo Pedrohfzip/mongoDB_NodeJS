@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="./style.css">
+</head>
 <div class="col-6 mx-auto mb-4">
         <div class="d-flex justify-content-center mt-5">
             <form action="" class="d-flex">
@@ -6,24 +9,38 @@
             </form>
         </div>
         <div class="text-center mt-4">
-            <a href="/admin/formprodutos" class="btn btn-success ps-4 pe-4">Add Item</a>
-            <a class="btn btn-success  " href="/admin/categorias/formcategorias">Add categorias</a>    
+            <a href="/admin/formprodutos" class="btn btn-success ps-4 pe-4">Adicionar produto</a>
+            <a class="btn btn-success  " href="/admin/categorias/">Categorias</a>      
         </div>
-        
-        
 </div>
 
 <hr>
 
-
-<div class="d-flex flex-wrap mx-auto">
-    {{#each produtos}}
-        <div class="text-center me-2 ">
-            <h1>{{nome}}</h1>
-            <p>Preço: {{preco}}</p>
-        </div>
-    {{else}}
-    {{/each}}
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="""col-4">Nome</th>
+                <th class="col-4">Preco</th>
+                <th class="col-4">Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each produtos}}
+                <tr>
+                    <td class="col-2">{{nome}}</td>
+                    <td class="col-2">{{preco}}</td>
+                    <td class="col-2">{{categoria.nome}}</td>
+                    <td class="col-4">
+                        <a href="/admin/formUpdateProdutos/{{_id}}" class="btn btn-warning">Editar</a>
+                        <a href="/admin/deleteProduto/{{_id}}" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            {{else}}
+            {{/each}}
+        </tbody>
+    </table>
 </div>
+
 
     

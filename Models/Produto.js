@@ -9,6 +9,11 @@ const Produto = new Schema({
     preco: {
         type: Number,
         require: false
+    },
+    categoria: {
+        type: Schema.Types.ObjectId,
+        ref: "categorias",
+        required: true
     }
 })
 

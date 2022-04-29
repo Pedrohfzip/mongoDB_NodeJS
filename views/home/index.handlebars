@@ -1,1 +1,25 @@
-<a href="/admin/"><button class="btn btn-success">Teste</button></a>
+<head>
+    <link rel="stylesheet" href="../../public/css/style.css">
+</head>
+<div class="col-6 mx-auto mb-4">
+    <div class="d-flex justify-content-center mt-5">
+            <form action="" class="d-flex">
+                <input type="search" class="form-control me-2 " placeholder="Search">
+                <a href="" class="btn btn-outline-success">Pesquisar</a>
+            </form>
+        </div>
+</div>
+<hr>
+<div class="container">
+    <div class="d-flex flex-wrap mx-auto">
+        {{#each produtos}}
+            <div class="card text-center me-3 mt-3" style="width: 400px;" id="cardProduto">
+                <h2>{{nome}}</h2>
+                <p>Preço: <small>{{preco}}</small></p>
+                <p>Categoria: <small>{{categoria.nome}}</small> </p>
+            </div>
+        {{else}}
+        <h2>Nenhum categoria cadastrada</h2>
+        {{/each}}
+    </div>  
+</div>
